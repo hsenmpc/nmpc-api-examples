@@ -32,5 +32,5 @@ The NMPC APIs are secured using OAuth2 and require a standard `Authorization` he
 <p><img align="center" width="75%" height="75%" src="./images/systemtosystemvariables.png">
 
 * Set the two placeholder variables for your credentials (`client_id` and `client_secret`) with your system credentials.
-* Send the `Get Token` request <p><img align="center" width="50%" height="50%" src="./images/gettookenrunfirst.png">
+* Send the `Get Token` request <p><img align="center" width="50%" height="50%" src="./images/gettokenrunfirst.png">
 * Run example requests
