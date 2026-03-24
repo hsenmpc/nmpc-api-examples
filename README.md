@@ -16,8 +16,10 @@ The NMPC APIs are secured using OAuth2 and require a standard `Authorization` he
 # Obtaining a token (User Account)
 * Select the parent folder of the collection "NMPC HSE Collection"
 <p><img align="center" width="75%" height="75%" src="./images/parentfolder.png">
+
 * Click the Orange Button labelled `Get New Access Token`
 <p><img align="center" width="75%" height="75%" src="./images/getnewaccesstoken.png">
+
 * A window will pop up asking for your login credentials - complete them and login
 * Click Orange `Use Token` button
 * Run example requests
@@ -25,8 +27,10 @@ The NMPC APIs are secured using OAuth2 and require a standard `Authorization` he
 # Obtaining a token (System Account)
 * Select the parent folder of the collection "NMPC HSE Collection"
 <p><img align="center" width="75%" height="75%" src="./images/parentfolder.png">
+
 * Select the variables tab
 <p><img align="center" width="75%" height="75%" src="./images/systemtosystemvariables.png">
+
 * Set the two placeholder variables for your credentials (`client_id` and `client_secret`) with your system credentials.
 * Send the `Get Token` request <p><img align="center" width="50%" height="50%" src="./images/gettookenrunfirst.png">
 * Run example requests
