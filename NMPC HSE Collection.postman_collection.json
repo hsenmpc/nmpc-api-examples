@@ -2279,6 +2279,59 @@
 					"response": []
 				},
 				{
+					"name": "Get mapped GTIN Code for concept",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ConceptMap/$translate?url=http://snomed.info/sct?fhir_cm=680431000220102&code=266941000220104&system=http://snomed.info/sct",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ConceptMap",
+								"$translate"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_cm=680431000220102"
+								},
+								{
+									"key": "code",
+									"value": "266941000220104"
+								},
+								{
+									"key": "system",
+									"value": "http://snomed.info/sct"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/conceptmap-operation-translate.html](https://hl7.org/fhir/R4/conceptmap-operation-translate.html)"
+					},
+					"response": []
+				},
+				{
 					"name": "Fast moving supplement - query for NMPC concepts: PCRS GMS Standard Drug",
 					"request": {
 						"method": "POST",
