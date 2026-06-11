@@ -2873,6 +2873,59 @@
 						"description": "Send two requests as a batch"
 					},
 					"response": []
+				},
+				{
+					"name": "Snomed Version specific query 20260521",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct/1601000220105/version/20260521?fhir_vs=ecl/(%5E660401000220107%20)&filter=sod&includeDesignations=true",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct/1601000220105/version/20260521?fhir_vs=ecl/(%5E660401000220107%20)"
+								},
+								{
+									"key": "filter",
+									"value": "sod"
+								},
+								{
+									"key": "includeDesignations",
+									"value": "true"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)"
+					},
+					"response": []
 				}
 			]
 		},
