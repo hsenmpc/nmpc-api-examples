@@ -2171,6 +2171,98 @@
 					"response": []
 				},
 				{
+					"name": "Find AMPPs by ATC Code",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=ecl/(%5E%20680441000220106%20%7B%7B%20M%20mapTarget%3D%22C10BA02%22%20%7D%7D)",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=ecl/(%5E%20680441000220106%20%7B%7B%20M%20mapTarget%3D%22C10BA02%22%20%7D%7D)",
+									"description": "^ 680441000220106|NMPC simple map from SNOMED CT to ATC type reference set| {{ M mapTarget=\"C10BA02\" }}"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)\n\nThis uses an ECL constraint based on the mapTarget of the specific ATCCode (in this example C10BA02)\n\n(^ 680441000220106|NMPC simple map from SNOMED CT to ATC type reference set| {{ M mapTarget=\"C10BA02\" }} AND ^660401000220107|AMPP reference set|)"
+					},
+					"response": []
+				},
+				{
+					"name": "Find AMPs by ATC Code",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=ecl/(%5E%20680441000220106%20%7B%7B%20M%20mapTarget%3D%22C10BA02%22%20%7D%7D%20AND%20%5E660381000220107%20)",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=ecl/(%5E%20680441000220106%20%7B%7B%20M%20mapTarget%3D%22C10BA02%22%20%7D%7D%20AND%20%5E660381000220107%20)",
+									"description": "^ 680441000220106|NMPC simple map from SNOMED CT to ATC type reference set| {{ M mapTarget=\"C10BA02\" }} AND ^660381000220107|AMP reference set|"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)\n\n\nThis uses an ECL constraint based on the mapTarget of the specific ATCCode (in this example C10BA02)\n\n(^ 680441000220106|NMPC simple map from SNOMED CT to ATC type reference set| {{ M mapTarget=\"C10BA02\" }} AND ^660381000220107|AMP reference set|)"
+					},
+					"response": []
+				},
+				{
 					"name": "Get mapped PCRS Code for concept",
 					"event": [
 						{
@@ -2328,6 +2420,52 @@
 							]
 						},
 						"description": "[https://hl7.org/fhir/R4/conceptmap-operation-translate.html](https://hl7.org/fhir/R4/conceptmap-operation-translate.html)"
+					},
+					"response": []
+				},
+				{
+					"name": "Find AMPPs by GTIN",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=ecl/(%5E%20680431000220102%20%7B%7B%20M%20mapTarget%3D%2200380631207109%22%20%7D%7D%20AND%20%5E660401000220107%20)",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=ecl/(%5E%20680431000220102%20%7B%7B%20M%20mapTarget%3D%2200380631207109%22%20%7D%7D%20AND%20%5E660401000220107%20)",
+									"description": " (^ 680431000220102|NMPC simple map from SNOMED CT to GTIN type reference set| {{ M mapTarget=\"00380631207109\" }} AND ^660401000220107|AMPP reference set|)"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)\n\nThis uses an ECL constraint based on the mapTarget of the specific GTIN (in this example 00380631207109)\n\n (^ 680431000220102|NMPC simple map from SNOMED CT to GTIN type reference set| {{ M mapTarget=\"00380631207109\" }} AND ^660401000220107|AMPP reference set|)"
 					},
 					"response": []
 				},
