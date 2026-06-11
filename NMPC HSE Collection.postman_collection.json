@@ -2306,6 +2306,34 @@
 					"response": []
 				},
 				{
+					"name": "Query for reimbursable category GMS Standard Drug (100) with constraint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"valueSet\",\n      \"resource\": {\n        \"resourceType\": \"ValueSet\",\n        \"compose\": {\n          \"inactive\": false,\n          \"include\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"filter\": [\n                {\n                  \"property\": \"CurrentCategoryMember\",\n                  \"op\": \"=\",\n                  \"value\": \"https://nmpc.hse.ie/PCRS/Category|100\"\n                },\n                {\n                  \"property\": \"constraint\",\n                  \"op\": \"=\",\n                  \"value\": \"^ 660401000220107 : 774160008 = < 90332006\"\n                }\n              ]\n            }\n          ]\n        }\n      }\n    },\n    {\n      \"name\": \"useSupplement\",\n      \"valueCanonical\": \"https://nmpc.hse.ie/CodeSystem/nmpc-supplement\"\n    },\n    {\n      \"name\": \"count\",\n      \"valueInteger\": 10\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							]
+						},
+						"description": "Constraint is:\nAMPP containing clinical drug that is a child of Paracetamol-containing product\n\nECL:\n^ 660401000220107|AMPP reference set| : 774160008|Contains clinical drug| = < 90332006|Paracetamol-containing product|"
+					},
+					"response": []
+				},
+				{
 					"name": "Fast moving supplement - query for NMPC concepts with ShortageReason",
 					"request": {
 						"method": "POST",
@@ -2329,6 +2357,329 @@
 								"$expand"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query for shortage with constraint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"valueSet\",\n      \"resource\": {\n        \"resourceType\": \"ValueSet\",\n        \"compose\": {\n          \"inactive\": false,\n          \"include\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"filter\": [\n                {\n                  \"property\": \"ShortageReason\",\n                  \"op\": \"exists\",\n                  \"value\": \"true\"\n                },\n                {\n                  \"property\": \"constraint\",\n                  \"op\": \"=\",\n                  \"value\": \"(<< 378991000220105 AND ^ 660401000220107 )\"\n                }\n              ]\n            }\n          ]\n        }\n      }\n    },\n    {\n      \"name\": \"useSupplement\",\n      \"valueCanonical\": \"https://nmpc.hse.ie/CodeSystem/nmpc-supplement\"\n    },\n    {\n      \"name\": \"property\",\n      \"valueString\": \"ShortageReason\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							]
+						},
+						"description": "(<< 378991000220105|Alendronic acid 70 mg + colecalciferol 2,800 units oral tablet (4 tablets)| AND ^ 660401000220107|AMPP reference set|)"
+					},
+					"response": []
+				},
+				{
+					"name": "Query for NOT shortage with same constraint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"resourceType\": \"Parameters\",\n  \"parameter\": [\n    {\n      \"name\": \"valueSet\",\n      \"resource\": {\n        \"resourceType\": \"ValueSet\",\n        \"compose\": {\n          \"inactive\": false,\n          \"include\": [\n            {\n              \"system\": \"http://snomed.info/sct\",\n              \"filter\": [\n                {\n                  \"property\": \"constraint\",\n                  \"op\": \"=\",\n                  \"value\": \"(<< 378991000220105 AND ^ 660401000220107 )\"\n                },\n                {\n                  \"property\": \"ShortageReason\",\n                  \"op\": \"exists\",\n                  \"value\": \"false\"\n                }\n              ]\n            }\n          ]\n        }\n      }\n    },\n    {\n      \"name\": \"useSupplement\",\n      \"valueCanonical\": \"https://nmpc.hse.ie/CodeSystem/nmpc-supplement\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							]
+						},
+						"description": "(<< 378991000220105|Alendronic acid 70 mg + colecalciferol 2,800 units oral tablet (4 tablets)| AND ^ 660401000220107|AMPP reference set|)"
+					},
+					"response": []
+				},
+				{
+					"name": "Find all children of a Concept option 1: is-a",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=isa/576901000220103",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=isa/576901000220103",
+									"description": "Is a Paracetamol 500 mg oral tablet (24 tablets)"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)"
+					},
+					"response": []
+				},
+				{
+					"name": "Find all children of a Concept option 2: ECL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=ecl/(%3C576901000220103)",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=ecl/(%3C576901000220103)",
+									"description": "<576901000220103 | Paracetamol 500 mg oral tablet (24 tablets)"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)"
+					},
+					"response": []
+				},
+				{
+					"name": "Find all AMPs containing an ingredient",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=ecl/%5E%20660381000220107%20%3A%20%3C%3C%20762951001%20%3D%20387517004%20",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=ecl/%5E%20660381000220107%20%3A%20%3C%3C%20762951001%20%3D%20387517004%20",
+									"description": "^ 660381000220107 : << 762951001 = 387517004 "
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)\n\nThis looks for any product that is an AMP (member of AMP refset)\nThat has an ingredient (this is descendents or self of \"Has ingredient\" to account for sometimes also being an active ingredient / precise active ingredient\nEqual to an ingredient (substance) - in this case paracetamol\n\nECL expression:\n^ 660381000220107|AMP reference set| : << 762951001|Has ingredient| = 387517004|Paracetamol|"
+					},
+					"response": []
+				},
+				{
+					"name": "Find all AMPPs containing an ingredient",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=ecl/(%5E%20660401000220107%20%3A%20774160008%20%3D%20(%5E%20660381000220107%20%3A%3C%3C%20762951001%20%3D%20387517004%20))",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=ecl/(%5E%20660401000220107%20%3A%20774160008%20%3D%20(%5E%20660381000220107%20%3A%3C%3C%20762951001%20%3D%20387517004%20))"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)\n\nThis looks for any product that is an AMPP (member of AMPP refset)\nThat contains a clinical drug \nThat is in the AMP reference set\nThat has an ingredient (this is descendents or self of \"Has ingredient\" to account for sometimes also being an active ingredient / precise active ingredient\nEqual to an ingredient (substance) - in this case paracetamol\n\nECL expression:\n (^ 660401000220107|AMPP reference set| : 774160008|Contains clinical drug| = (^ 660381000220107|AMP reference set|:<< 762951001|Has ingredient| = 387517004|Paracetamol|))"
+					},
+					"response": []
+				},
+				{
+					"name": "Batch $expand",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Result is \" + pm.environment.get(\"prod_conformance_experimental\"), function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.experimental).to.eql(pm.environment.get(\"prod_conformance_experimental\")=='true');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"batch\",\r\n    \"resourceType\": \"Bundle\",\r\n    \"entry\": [\r\n        {\r\n            \"request\": {\r\n                \"method\": \"GET\",\r\n                \"url\": \"ValueSet/$expand?url=http%3A%2F%2Fsnomed.info%2Fsct%3Ffhir_vs%3Disa%2F713610005\"\r\n            }\r\n        },\r\n        {\r\n            \"request\": {\r\n                \"method\": \"GET\",\r\n                \"url\": \"ValueSet/$expand?url=http%3A%2F%2Fsnomed.info%2Fsct%3Ffhir_vs%3Disa%2F120982004\"\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{terminology-server}}",
+							"host": [
+								"{{terminology-server}}"
+							]
+						},
+						"description": "Send two requests as a batch"
+					},
+					"response": []
+				},
+				{
+					"name": "Batch $lookup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Result is \" + pm.environment.get(\"prod_conformance_experimental\"), function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.experimental).to.eql(pm.environment.get(\"prod_conformance_experimental\")=='true');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"batch\",\r\n    \"resourceType\": \"Bundle\",\r\n    \"entry\": [\r\n        {\r\n            \"request\": {\r\n                \"method\": \"GET\",\r\n                \"url\": \"CodeSystem/$lookup?system=http://snomed.info/sct&code=287801000220106\"\r\n            }\r\n        },\r\n        {\r\n            \"request\": {\r\n                \"method\": \"GET\",\r\n                \"url\": \"CodeSystem/$lookup?system=http://snomed.info/sct&code=129950006\"\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{terminology-server}}",
+							"host": [
+								"{{terminology-server}}"
+							]
+						},
+						"description": "Send two requests as a batch"
 					},
 					"response": []
 				}
@@ -2566,6 +2917,165 @@
 								{
 									"key": "includeDesignations",
 									"value": "true"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)"
+					},
+					"response": []
+				},
+				{
+					"name": "How many results are there?",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=ecl/%3C%20105590001%20&count=0",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=ecl/%3C%20105590001%20"
+								},
+								{
+									"key": "count",
+									"value": "0"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)"
+					},
+					"response": []
+				},
+				{
+					"name": "Paging results 1 (first 15 results)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=ecl/%3C%20105590001%20&count=15&offset=0&filter",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=ecl/%3C%20105590001%20"
+								},
+								{
+									"key": "count",
+									"value": "15"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "filter",
+									"value": null
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/valueset-operation-expand.html](https://hl7.org/fhir/R4/valueset-operation-expand.html)"
+					},
+					"response": []
+				},
+				{
+					"name": "Paging results 1 (next 15 results)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ValueSet/$expand?url=http://snomed.info/sct?fhir_vs=ecl/%3C%20105590001%20&count=15&offset=15",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ValueSet",
+								"$expand"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_vs=ecl/%3C%20105590001%20"
+								},
+								{
+									"key": "count",
+									"value": "15"
+								},
+								{
+									"key": "offset",
+									"value": "15"
 								}
 							]
 						},
