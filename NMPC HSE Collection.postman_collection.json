@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a01e777e-c6e3-4673-9e62-c8cb4a66ea9f",
+		"_postman_id": "e32d9dfd-f543-46d2-ae61-249c0e89ed9f",
 		"name": "NMPC HSE Collection",
 		"description": "Documentation describing the parts of the FHIR specification implemented by Ontoserver\n\n[https://ontoserver.csiro.au/docs/6/api-fhir.html](https://ontoserver.csiro.au/docs/6/api-fhir.html)\n\nFurther detail also available in the FHIR specification for the terminology module\n\n[https://hl7.org/fhir/R4/terminology-module.html](https://hl7.org/fhir/R4/terminology-module.html)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -2267,6 +2267,59 @@
 								{
 									"key": "code",
 									"value": "371211000220101"
+								},
+								{
+									"key": "system",
+									"value": "http://snomed.info/sct"
+								}
+							]
+						},
+						"description": "[https://hl7.org/fhir/R4/conceptmap-operation-translate.html](https://hl7.org/fhir/R4/conceptmap-operation-translate.html)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get mapped GTIN Code for concept",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{terminology-server}}/ConceptMap/$translate?url=http://snomed.info/sct?fhir_cm=680431000220102&code=266941000220104&system=http://snomed.info/sct",
+							"host": [
+								"{{terminology-server}}"
+							],
+							"path": [
+								"ConceptMap",
+								"$translate"
+							],
+							"query": [
+								{
+									"key": "url",
+									"value": "http://snomed.info/sct?fhir_cm=680431000220102"
+								},
+								{
+									"key": "code",
+									"value": "266941000220104"
 								},
 								{
 									"key": "system",
